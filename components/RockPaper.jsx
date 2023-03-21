@@ -80,7 +80,8 @@ export default function RockPaper(){
                         {!result ? (
                             <Text style={styles.readyText}>Let's Play</Text>
                         ) : (
-                            <DisplayResult 
+                            
+                            <DisplayResult
                                 userChoice={userChoice}
                                 computerChoice={computerChoice}
                             />
@@ -121,15 +122,16 @@ const styles = StyleSheet.create({
     screen : {
         flex:1,
         flexDirection:'row',
-        backgroundColor: '#111111',
-        paddingBottom: 100,
+        
+        
     },
     readyText : {
-        marginTop:-48,
+        marginTop: -70,
         alignSelf:'center',
         textAlign:'center',
         width:'100%',
         fontSize:48,
         fontWeight:'bold',
     }
+    
 });
