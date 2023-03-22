@@ -2,7 +2,7 @@ import {View, Text, StyleSheet} from 'react-native'
 import {FontAwesome5} from '@expo/vector-icons'
 import React from 'react'
 
-const ICONS = ['hand-rock', 'hand-papers', 'hand-scissors'];
+const ICONS = ['hand-rock', 'hand-paper', 'hand-scissors'];
 
 const DisplayResult = ({userChoice, computerChoice}) => {
     return (
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        height: 80
+        height: 75
     },
     playerName: {
         color: '#373737',
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
     rightIcon: {
         transform: [
-            {rotateZ: '180deg'}, {rotateY: '90deg'}, {rotateX: '0deg'},
+            {rotateZ: '180deg'}, {rotateY: '90deg'}, {rotateX: '0deg'}
         ],
     },
 
