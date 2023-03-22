@@ -107,8 +107,6 @@ const styles = StyleSheet.create({
         flex:1,
         marginBottom: 5,
         backgroundColor: '#e8eaed',
-        
-        
     },
     result : {
         height:100,
@@ -118,12 +116,14 @@ const styles = StyleSheet.create({
     resultText : {
         fontSize:48,
         fontWeight: 'bold',
+        // Lägg till föreslagen stil
+        textTransform: 'uppercase',
+        letterSpacing: 2,
+        color: '#333',
+        marginTop: 10,
     },
     screen : {
         flex:1,
-        flexDirection:'row',
-        
-        
     },
     readyText : {
         marginTop: -70,
@@ -133,5 +133,5 @@ const styles = StyleSheet.create({
         fontSize:48,
         fontWeight:'bold',
     }
-    
+
 });
