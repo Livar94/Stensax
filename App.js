@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import RockPaper from './components/RockPaper';
+import RockPaper from './components/componentSpelareMotData/RockPaper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
