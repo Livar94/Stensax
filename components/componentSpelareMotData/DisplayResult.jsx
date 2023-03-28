@@ -11,7 +11,7 @@ const DisplayResult = ({userChoice, computerChoice}) => {
                 <View style={styles.column}>
                     <FontAwesome5
                         name={ICONS[userChoice - 1]}
-                        size={32}
+                        size={64}
                         color='#f9d835'
                         solid
                         style={userChoice === 3 ? styles.scissorsLeftIcon : styles.leftIcon}
@@ -22,7 +22,7 @@ const DisplayResult = ({userChoice, computerChoice}) => {
                 <View style={styles.column}>
                     <FontAwesome5
                         name={ICONS[computerChoice - 1]}
-                        size={32}
+                        size={64}
                         color='#f9d835'
                         solid
                         style={
