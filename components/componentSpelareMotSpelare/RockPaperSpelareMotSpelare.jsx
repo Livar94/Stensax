@@ -1,48 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import {Text, TextInput} from "react-native-paper";
-import {Button} from "react-native";
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+import axios from 'axios';
 
-function View(props) {
-    return null;
-}
+const BASE_URL = 'http://localhost:8080/api/user';
 
-function RockPaperSpelareMotSpelare() {
-    const [uuid, setUuid] = useState('');
+export default function Player () {
     const [name, setName] = useState('');
+    const [uuid, setUuid] = useState('');
 
-    useEffect(() => {
-        // Fetch UUID
-        axios.get('http://localhost:8080/api/user/auth/token')
+    const generateUuid = () => {
+        axios.get(`${BASE_URL}/auth/token`)
             .then(response => {
                 setUuid(response.data);
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             });
-    }, []);
+    };
 
-
-    const handleSetName = () => {
-        // Send POST request to set name
-        axios.post(`http://localhost:8080/api/user/${uuid}/name`, { name })
+    const setNameAndUuid = () => {
+        const requestBody = { name: name };
+        axios.post(`${BASE_URL}/${uuid}/name`, requestBody)
             .then(response => {
-                console.log(response.data);
+                console.log(response);
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             });
-    }
+    };
 
     return (
         <View>
-            <Text>UUID: {uuid}</Text>
-            <TextInput value={name} onChangeText={setName} />
-            <Button title="Set Name" onPress={handleSetName} />
+            <Button title="Generate UUID" onPress={generateUuid} />
+            {uuid ? <Text>{`UUID: ${uuid}`}</Text> : null}
+            <TextInput
+                placeholder="Enter your name"
+                value={name}
+                onChangeText={text => setName(text)}
+            />
+            <Button title="Set Name" onPress={setNameAndUuid} />
         </View>
     );
+};
+
+/*export default {Player};*/
 
 
-}
 
 
