@@ -40,7 +40,7 @@ const Actions = ({play, canPlay}) => {
 const styles = StyleSheet.create({
     actions: {
         height: 800,
-        marginTop: 400,
+        marginTop: 250,
         flexDirection:'row',
         justifyContent:'space-around',
 

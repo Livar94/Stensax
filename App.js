@@ -1,3 +1,4 @@
+/*
 import {StatusBar} from 'expo-status-bar';
 
 import {Button, StyleSheet, View} from 'react-native';
@@ -12,11 +13,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import RockPaper from './components/componentSpelareMotData/RockPaper';
 
-import RockPaperSpelareMotSpelare from './components/componentSpelareMotSpelare/RockPaperSpelareMotSpelare';
+import RockPaperSpelareMotSpelare from './components/componentSpelareMotSpelare/Player';
 
-/*
-import { Player } from './components/componentSpelareMotSpelare/RockPaperSpelareMotSpelare';
-*/
+
 
 
 const Stack = createStackNavigator();
@@ -24,12 +23,12 @@ const Stack = createStackNavigator();
 
 const HomeScreen = ({navigation}) => {
 
-    const handlePress = () => {
+    const handlePressPlayerVsComputer = () => {
         navigation.navigate('RockPaper');
 
     };
 
-    const handlePressVsPlayer = () => {
+    const handlePressPlayerVsPlayer = () => {
         navigation.navigate('RockPaperSpelareMotSpelare');
     };
 
@@ -39,8 +38,8 @@ const HomeScreen = ({navigation}) => {
 
             <View style={styles.container}>
 
-                <ChooseGame title="Player VS Computer!" onPress={handlePress}/>
-                <Button title="Player VS Player!" onPress={handlePressVsPlayer}/>
+                <ChooseGame title="Player VS Computer!" onPress={handlePressPlayerVsComputer}/>
+                <Button title="Player VS Player!" onPress={handlePressPlayerVsPlayer}/>
 
                 <StatusBar style="auto"/>
 
@@ -56,13 +55,9 @@ const HomeScreen = ({navigation}) => {
 const RockPaperScreen = () => {
 
     return (
-
         <View>
-
             <RockPaper/>
-
         </View>
-
     );
 
 };
@@ -78,17 +73,15 @@ const RockPaperSpelareMotSpelareScreen = () => {
 export default function App() {
 
     return (
-
         <NavigationContainer>
-
             <Stack.Navigator>
-
                 <Stack.Screen name="Home" component={HomeScreen}/>
+                <Stack.Screen name="Lobby" component={LobbyScreen}/>
+                <Stack.Screen name="WaitingForOpponent" component={WaitingForOpponentScreen}/>
+                <Stack.Screen name="OpenGames" component={OpenGamesScreen}/>
                 <Stack.Screen name="RockPaper" component={RockPaperScreen}/>
                 <Stack.Screen name="RockPaperSpelareMotSpelare" component={RockPaperSpelareMotSpelareScreen}/>
-
             </Stack.Navigator>
-
         </NavigationContainer>
 
     );
@@ -97,11 +90,39 @@ export default function App() {
 
 
 const styles = StyleSheet.create({
-
     container: {
-
         flex: 1
-
     },
+});*/
 
-});
+
+// App.js
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeScreen from './components/HomeScreen';
+import LobbyScreen from './components/LobbyScreen';
+import WaitingForOpponentScreen from './components/WaitingForOpponentScreen';
+import OpenGamesScreen from './components/OpenGamesScreen';
+import RockPaperScreen from './components/RockPaperScreen';
+import RockPaperSpelareMotSpelare from './components/RockPaperSpelareMotSpelare';
+
+const Stack = createStackNavigator();
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Lobby" component={LobbyScreen} />
+                <Stack.Screen name="WaitingForOpponent" component={WaitingForOpponentScreen} />
+                <Stack.Screen name="OpenGames" component={OpenGamesScreen} />
+                <Stack.Screen name="RockPaper" component={RockPaperScreen} />
+                <Stack.Screen name="RockPaperSpelareMotSpelare" component={RockPaperSpelareMotSpelare} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+
+}
+
