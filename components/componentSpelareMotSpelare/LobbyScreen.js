@@ -1,7 +1,7 @@
 // LobbyScreen.js
 import React from 'react';
 import { View, Button } from 'react-native';
-import { startGame } from '../api';
+import { startGame } from '../componentSpelareMotSpelare/api';
 
 export default function LobbyScreen({ navigation, route }) {
     const { playerId } = route.params;
