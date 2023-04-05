@@ -1,42 +1,42 @@
 // api.js
-const BASE_URL = "http://yourserverurl.com/api/games"; // Replace "yourserverurl.com" with your actual server URL
+const BASE_URL = "http://localhost:8080/api/games";
+const USER_BASE_URL = "http://localhost:8080/api/user";
 
-export const startGame = async (playerId) => {
-    const response = await fetch(`${BASE_URL}/${playerId}/game`, { method: "POST" });
+export const startGame = async (token) => {
+    const response = await fetch(`${USER_BASE_URL}/game`, {
+        method: "POST",
+        headers: { "Token": token },
+    });
     return response.ok;
 };
 
 export const getOpenGames = async () => {
     const response = await fetch(`${BASE_URL}/games`);
-    const data = await response.json();
-    return data;
+    return await response.json();
 };
 
-export const joinGame = async (gameId, playerId) => {
-    const response = await fetch(`${BASE_URL}/join/${gameId}?playerId=${playerId}`);
-    const data = await response.json();
-    return data;
-};
-
-export const getGameInfo = async (gameId, playerId) => {
-    const response = await fetch(`${BASE_URL}/${gameId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ playerId }),
+export const joinGame = async (gameId, token) => {
+    const response = await fetch(`${BASE_URL}/join/${gameId}`, {
+        headers: { "Token": token },
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
 };
 
-// api.js
-export const move = async (moveRequest) => {
+export const getGameInfo = async (gameId, token) => {
+    const response = await fetch(`${BASE_URL}/${gameId}`, {
+        headers: { "Token": token },
+    });
+    return await response.json();
+};
+
+export const move = async (moveRequest, token) => {
     const response = await fetch(`${BASE_URL}/move`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Token": token,
+        },
         body: JSON.stringify(moveRequest),
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
 };
-
-

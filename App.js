@@ -107,7 +107,7 @@ import WaitingForOpponentScreen from './components/componentSpelareMotSpelare/Wa
 import OpenGamesScreen from './components/componentSpelareMotSpelare/OpenGamesScreen';
 // import RockPaperScreen from './components/';
 import RockPaperSpelareMotSpelare from './components/componentSpelareMotSpelare/RockPaperSpelareMotSpelareScreen';
-// import api from '../RockPaperScissor/components/componentSpelareMotSpelare/api'
+
 
 const Stack = createStackNavigator();
 
@@ -121,7 +121,6 @@ export default function App() {
                 <Stack.Screen name="OpenGames" component={OpenGamesScreen} />
                 {/* <Stack.Screen name="RockPaper" component={RockPaperScreen} /> */}
                 <Stack.Screen name="RockPaperSpelareMotSpelare" component={RockPaperSpelareMotSpelare} />
-                {/* <Stack.Screen name='api' component={api} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     );
