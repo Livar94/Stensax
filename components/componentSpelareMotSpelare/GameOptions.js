@@ -6,7 +6,7 @@ import axios from 'axios';
 const GAME_BASE_URL = 'http://localhost:8080/api/games';
 
 export default function GameOptions({ route, navigation }) {
-    const { playerId } = route.params;
+    const { token } = route.params;
     const [openGames, setOpenGames] = useState([]);
 
     useEffect(() => {
@@ -14,7 +14,9 @@ export default function GameOptions({ route, navigation }) {
     }, []);
 
     const fetchOpenGames = () => {
-        axios.get(`${GAME_BASE_URL}/games`)
+        axios.get(`${GAME_BASE_URL}/games`, {
+            headers: { 'Token': token }
+        })
             .then(response => {
                 setOpenGames(response.data);
             })
@@ -24,9 +26,11 @@ export default function GameOptions({ route, navigation }) {
     };
 
     const startGame = () => {
-        axios.post(`${GAME_BASE_URL}/${playerId}/game`)
+        axios.post(`${GAME_BASE_URL}/game`, null, {
+            headers: { 'Token': token }
+        })
             .then(response => {
-                navigation.navigate('RockPaperSpelareMotSpelare', { playerId: playerId });
+                navigation.navigate('RockPaperSpelareMotSpelare', { token: token });
             })
             .catch(error => {
                 console.log(error);
@@ -34,9 +38,11 @@ export default function GameOptions({ route, navigation }) {
     };
 
     const joinGame = (gameId) => {
-        axios.get(`${GAME_BASE_URL}/join/${gameId}`, { params: { playerId: playerId } })
+        axios.get(`${GAME_BASE_URL}/join/${gameId}`, {
+            headers: { 'Token': token }
+        })
             .then(response => {
-                navigation.navigate('RockPaperSpelareMotSpelare', { playerId: playerId });
+                navigation.navigate('RockPaperSpelareMotSpelare', { token: token });
             })
             .catch(error => {
                 console.log(error);

@@ -4,18 +4,18 @@ import { getGameInfo, move } from '../componentSpelareMotSpelare/api';
 
 //The main React component file where the game logic is handled
 export default function RockPaperSpelareMotSpelareScreen({ route }) {
-    const { game, playerId } = route.params;
+    const { game, token } = route.params;
     const [gameInfo, setGameInfo] = useState(game);
     const [moveChoice, setMoveChoice] = useState(null);
 
     useEffect(() => {
         const fetchGameInfo = async () => {
-            const info = await getGameInfo(game.gameId, { playerId: playerId });
+            const info = await getGameInfo(game.gameId, { token });
             setGameInfo(info);
         };
 
         fetchGameInfo();
-        // Add polling mechanism
+        // Added polling mechanism to periodically fetch data from a server to keep the client updated. In this context, it's used to check if there are any updates to the game state.
         const interval = setInterval(() => {
             fetchGameInfo();
         }, 5000); // Poll every 5 seconds
@@ -23,7 +23,7 @@ export default function RockPaperSpelareMotSpelareScreen({ route }) {
         return () => {
             clearInterval(interval);
         };
-    }, [game.gameId, playerId]);
+    }, [game.gameId, token]);
 
     const handleMove = async (playerMove) => {
         setMoveChoice(playerMove);
@@ -32,7 +32,7 @@ export default function RockPaperSpelareMotSpelareScreen({ route }) {
     useEffect(() => {
         if (moveChoice) {
             const makeMove = async () => {
-                const updatedGame = await move({ gameId: game.gameId, playerId: playerId, playerMove: moveChoice });
+                const updatedGame = await move({ gameId: game.gameId, token, playerMove: moveChoice });
                 setGameInfo(updatedGame);
             };
 

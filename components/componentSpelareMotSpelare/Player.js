@@ -53,6 +53,7 @@ export default {Player};
 
 
 // Player.js
+// Player.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import axios from 'axios';
@@ -62,24 +63,26 @@ const GAME_BASE_URL = 'http://localhost:8080/api/games';
 
 export default function Player({ navigation }) {
     const [name, setName] = useState('');
-    const [uuid, setUuid] = useState('');
+    const [token, setToken] = useState('');
 
-    const generateUuid = () => {
+    const generateToken = () => {
         axios.get(`${BASE_URL}/auth/token`)
             .then(response => {
-                setUuid(response.data);
+                setToken(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
     };
 
-    const setNameAndUuid = () => {
+    const setNameAndToken = () => {
         const requestBody = { name: name };
-        axios.post(`${BASE_URL}/${uuid}/name`, requestBody)
+        axios.post(`${BASE_URL}/name`, requestBody, {
+            headers: { 'Token': token, 'Content-Type': 'application/json' },
+        })
             .then(response => {
                 console.log(response);
-                navigation.navigate('GameOptions', { playerId: uuid });
+                navigation.navigate('GameOptions', { token: token });
             })
             .catch(error => {
                 console.log(error);
@@ -88,14 +91,15 @@ export default function Player({ navigation }) {
 
     return (
         <View>
-            <Button title="Generate UUID" onPress={generateUuid} />
-            {uuid ? <Text>{`UUID: ${uuid}`}</Text> : null}
+            <Button title="Generate Token" onPress={generateToken} />
+            {token ? <Text>{`Token: ${token}`}</Text> : null}
             <TextInput
                 placeholder="Enter your name"
                 value={name}
                 onChangeText={text => setName(text)}
             />
-            <Button title="Set Name and Play" onPress={setNameAndUuid} />
+            <Button title="Set Name and Play" onPress={setNameAndToken} />
         </View>
     );
 };
+

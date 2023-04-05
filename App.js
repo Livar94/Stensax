@@ -101,13 +101,12 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// import HomeScreen from './components/HomeScreen';
+import HomeScreen from './components/FrontPage/HomeScreen';
 import LobbyScreen from './components/componentSpelareMotSpelare/LobbyScreen';
 import WaitingForOpponentScreen from './components/componentSpelareMotSpelare/WaitingForOpponentScreen';
 import OpenGamesScreen from './components/componentSpelareMotSpelare/OpenGamesScreen';
-// import RockPaperScreen from './components/';
 import RockPaperSpelareMotSpelare from './components/componentSpelareMotSpelare/RockPaperSpelareMotSpelareScreen';
-
+import RockPaper from "./components/componentSpelareMotData/RockPaper";
 
 const Stack = createStackNavigator();
 
@@ -115,15 +114,15 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Lobby" component={LobbyScreen} />
                 <Stack.Screen name="WaitingForOpponent" component={WaitingForOpponentScreen} />
                 <Stack.Screen name="OpenGames" component={OpenGamesScreen} />
-                {/* <Stack.Screen name="RockPaper" component={RockPaperScreen} /> */}
+                <Stack.Screen name="RockPaperSpelareMotData" component={RockPaper} />
                 <Stack.Screen name="RockPaperSpelareMotSpelare" component={RockPaperSpelareMotSpelare} />
             </Stack.Navigator>
         </NavigationContainer>
     );
-
 }
+
 

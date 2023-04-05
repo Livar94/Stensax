@@ -4,7 +4,7 @@ import { View, Text, Button } from 'react-native';
 import { getOpenGames, joinGame } from '../componentSpelareMotSpelare/api';
 
 export default function OpenGamesScreen({ navigation, route }) {
-    const { playerId } = route.params;
+    const { token } = route.params;
     const [openGames, setOpenGames] = useState([]);
 
     useEffect(() => {
@@ -17,8 +17,8 @@ export default function OpenGamesScreen({ navigation, route }) {
     }, []);
 
     const handleJoinGame = async (gameId) => {
-        const game = await joinGame(gameId, playerId);
-        navigation.navigate('RockPaperSpelareMotSpelare', { game, playerId });
+        const game = await joinGame(gameId, token);
+        navigation.navigate('RockPaperSpelareMotSpelare', { game, token });
     };
 
     return (
