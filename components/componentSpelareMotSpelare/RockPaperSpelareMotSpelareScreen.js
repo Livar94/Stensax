@@ -49,6 +49,7 @@ export default function RockPaperSpelareMotSpelareScreen({ route }) {
             <Text>Status: {status}</Text>
             <Text>Player One Wins: {playerOneWins}</Text>
             <Text>Player Two Wins: {playerTwoWins}</Text>
+            <Text>Opponent ID: {opponentId}</Text>
             <Button title="Rock" onPress={() => handleMove('ROCK')} />
             <Button title="Paper" onPress={() => handleMove('PAPER')} />
             <Button title="Scissors" onPress={() => handleMove('SCISSORS')} />
