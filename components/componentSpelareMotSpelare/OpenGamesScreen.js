@@ -18,7 +18,7 @@ export default function OpenGamesScreen({ navigation, route }) {
 
     const handleJoinGame = async (gameId) => {
         const game = await joinGame(gameId, token);
-        navigation.navigate('RockPaperSpelareMotSpelare', { game, token });
+        navigation.navigate('RockPaperSpelareMotSpelareScreen', { game, token });
     };
 
     return (

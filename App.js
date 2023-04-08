@@ -103,10 +103,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './components/FrontPage/HomeScreen';
 import LobbyScreen from './components/componentSpelareMotSpelare/LobbyScreen';
+import GameOptions from './components/componentSpelareMotSpelare/GameOptions';
 import WaitingForOpponentScreen from './components/componentSpelareMotSpelare/WaitingForOpponentScreen';
 import OpenGamesScreen from './components/componentSpelareMotSpelare/OpenGamesScreen';
 import RockPaperSpelareMotSpelareScreen from './components/componentSpelareMotSpelare/RockPaperSpelareMotSpelareScreen';
 import RockPaper from "./components/componentSpelareMotData/RockPaper";
+import Player from './components/componentSpelareMotSpelare/Player';
 
 const Stack = createStackNavigator();
 
@@ -115,7 +117,9 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Player" component={Player} />
                 <Stack.Screen name="Lobby" component={LobbyScreen} />
+                <Stack.Screen name="GameOptions" component={GameOptions} />
                 <Stack.Screen name="WaitingForOpponent" component={WaitingForOpponentScreen} />
                 <Stack.Screen name="OpenGames" component={OpenGamesScreen} />
                 <Stack.Screen name="RockPaper" component={RockPaper} />

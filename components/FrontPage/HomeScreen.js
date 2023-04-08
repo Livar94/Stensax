@@ -13,8 +13,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={{ marginVertical: 20 }}>or</Text>
             <Button
                 title="Spelare mot Spelare"
-                onPress={() => navigation.navigate('RockPaperSpelareMotSpelareScreen')}
-            />
+                onPress={() => navigation.navigate('Player')}      />
         </View>
     );
 }
