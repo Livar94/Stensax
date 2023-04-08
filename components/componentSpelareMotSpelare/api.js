@@ -1,6 +1,10 @@
 // api.js
-const BASE_URL = "http://localhost:8080/api/games";
-const USER_BASE_URL = "http://localhost:8080/api/user";
+/*const BASE_URL = "http://localhost:8080/api/games";
+const USER_BASE_URL = "http://localhost:8080/api/user";*/
+
+const BASE_URL = "http://192.168.0.6:8080/api/games";
+const USER_BASE_URL = "http://192.168.0.6:8080/api/user";
+
 
 export const startGame = async (token) => {
     const response = await fetch(`${USER_BASE_URL}/game`, {

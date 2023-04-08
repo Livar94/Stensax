@@ -1,7 +1,7 @@
 // OpenGamesScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { getOpenGames, joinGame } from '../componentSpelareMotSpelare/api';
+import { getOpenGames, joinGame } from './api';
 
 export default function OpenGamesScreen({ navigation, route }) {
     const { token } = route.params;

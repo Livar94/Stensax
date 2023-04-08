@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { getGameInfo, move } from '../componentSpelareMotSpelare/api';
+import { getGameInfo, move } from './api';
 
 //The main React component file where the game logic is handled
 export default function RockPaperSpelareMotSpelareScreen({ route }) {

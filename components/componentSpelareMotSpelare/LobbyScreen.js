@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Button } from 'react-native';
-import { startGame } from '../componentSpelareMotSpelare/api';
+import { startGame } from './api';
 
 export default function LobbyScreen({ navigation, route }) {
     const { playerId } = route.params;

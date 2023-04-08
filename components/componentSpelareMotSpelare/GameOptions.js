@@ -1,9 +1,12 @@
 // GameOptions.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import axios from 'axios';
+/*import axios from 'axios';*/
+import apiInstance from './apiInstance';
 
-const GAME_BASE_URL = 'http://localhost:8080/api/games';
+/*const GAME_BASE_URL = 'http://localhost:8080/api/games';*/
+const GAME_BASE_URL = '/api/games';
+
 
 export default function GameOptions({ route, navigation }) {
     const { token } = route.params;
@@ -14,9 +17,10 @@ export default function GameOptions({ route, navigation }) {
     }, []);
 
     const fetchOpenGames = () => {
-        axios.get(`${GAME_BASE_URL}/games`, {
+        /*axios.get(`${GAME_BASE_URL}/games`, {
             headers: { 'Token': token }
-        })
+        })*/
+        apiInstance.get('/games', {headers: { 'Token': token } })
             .then(response => {
                 setOpenGames(response.data);
             })
@@ -26,7 +30,10 @@ export default function GameOptions({ route, navigation }) {
     };
 
     const startGame = () => {
-        axios.post(`${GAME_BASE_URL}/game`, null, {
+        /*axios.post(`${GAME_BASE_URL}/game`, null, {
+            headers: { 'Token': token }
+        })*/
+        apiInstance.post('/game', null, {
             headers: { 'Token': token }
         })
             .then(response => {
@@ -38,7 +45,10 @@ export default function GameOptions({ route, navigation }) {
     };
 
     const joinGame = (gameId) => {
-        axios.get(`${GAME_BASE_URL}/join/${gameId}`, {
+        /*axios.get(`${GAME_BASE_URL}/join/${gameId}`, {
+            headers: { 'Token': token }
+        })*/
+        apiInstance.get(`/join/${gameId}`, {
             headers: { 'Token': token }
         })
             .then(response => {
