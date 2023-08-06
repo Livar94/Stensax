@@ -13,7 +13,7 @@ export default function Player({ navigation }) {
   }, []);
 
   function getToken(func, p1) {
-    fetch('http://192.168.1.102:8080/api/user/auth/token', {
+    fetch('http://localhost:7979/api/user/auth/token', {
       method: 'post',
     })
       .then((response) => response.json())
@@ -23,13 +23,13 @@ export default function Player({ navigation }) {
         func(p1, data);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("There was an error with the fetch operation:", error);
       });
   }
 
   function postName(name, token) {
     console.log(token, name, 'nameToken');
-    fetch('http://192.168.1.102:8080/api/user/name', {
+    fetch('http://localhost:7979/api/user/name', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -44,12 +44,12 @@ export default function Player({ navigation }) {
         console.log(data, 'response');
       })
       .catch((error) => {
-        console.log(error);
+        console.error("There was an error with the fetch operation:", error.message);
       });
   }
 
   function createGame() {
-    fetch('http://192.168.1.102:8080/api/games/game', {
+    fetch('http://192.168.0.6:7979/api/games/game', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export default function Player({ navigation }) {
   }
 
   function fetchGames() {
-    fetch('http://192.168.1.102:8080/api/games/games', {
+    fetch('http://192.168.0.6:7979/api/games/games', {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function Player({ navigation }) {
 
   function joinGame(gameId) {
     console.log(gameId, token, 'getting game and player id');
-    fetch(`http://192.168.1.102:8080/api/games/join`, {
+    fetch(`http://192.168.0.6:7979/api/games/join`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',

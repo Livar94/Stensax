@@ -23,11 +23,33 @@ function Game({route, navigation }) {
   const [userMove, setUserMove] = useState(null);
 
 
+  //The first useEffect will set the initial gameInfo:
     useEffect(() => {
       // console.log(route?.params?.data,'')
       setGameInfo(route?.params?.data)
 
-    }, [])
+    }, []);
+
+    //The second useEffect will start the game loop, but only if the gameId and playerId are present in gameInfo:
+    useEffect(() => {
+      if (!gameInfo?.gameId || !gameInfo.playerOne?.playerId) {
+          console.log("Incomplete gameInfo, not starting the game loop.");
+          return;
+      }
+  
+      const id = setInterval(() => {
+          fetchGameInfo(gameInfo);
+      }, 1000);
+  
+      setIntervalId(id);
+  
+      return () => {
+          clearInterval(id);
+      };
+  }, [gameInfo]);
+
+  
+
   
     useEffect(() => {
       const id = setInterval(() => {
@@ -48,9 +70,17 @@ function Game({route, navigation }) {
     // };
   
     function fetchGameInfo(gameInfo) {
-      if (!gameInfo) return
+
+      if (!gameInfo?.gameId) {
+        console.log("No game ID provided, not making the fetch call.");
+        return;
+    }
+
+      console.log("Current gameInfo:", gameInfo); // Added console log
+
+      /*if (!gameInfo) return
       console.log(gameInfo, 'game info')
-      fetch(`http://192.168.1.102:8080/api/games/${gameInfo?.gameId}`,{
+      fetch(`http://192.168.0.6:7979/api/games/${gameInfo?.gameId}`,{
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -62,9 +92,38 @@ function Game({route, navigation }) {
         })
       })
       .then(response => response.json())
-      .then(data => {
-        
-        console.log(data, "gameData")
+      .then(data => {*/
+
+        // Check if gameId and playerId are both present
+
+
+
+        if (!gameInfo.gameId || !gameInfo.playerOne?.playerId) {
+          console.log("Incomplete gameInfo, not making the fetch call.");
+          return;
+  }
+
+  fetch(`http://192.168.0.6:7979/api/games/${gameInfo?.gameId}`,{
+      method: "post",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          playerId: gameInfo?.playerOne?.playerId
+      })
+  })
+  .then(response => {
+      if (!response.ok) {
+          console.error("Server returned an error:", response.statusText); // Log if there's a non-200 response
+          return null; // Don't proceed to the next then
+      }
+      return response.json();
+  })
+  .then(data => {
+      if (data && data.message !== "No game found") { // Only process data if it's not null 
+                // Handle the game data logic here
+                console.log("Received gameData:", data);
+      
         setGameData(data)
         if (gameInfo?.playerOne?.playerName == data?.playerOne) {
             
@@ -87,6 +146,9 @@ function Game({route, navigation }) {
                 
                 setResult_p(`You ${data?.playerTwoMove}, ${data?.playerOne} ${data?.playerOneMove}`)
               };
+            } else if (data.message === "No game found") {
+              console.log("No game exists yet.");
+          }
       })
       .catch(error => {
         // console.log(error, "createGame");
@@ -96,7 +158,7 @@ function Game({route, navigation }) {
 
   function makeMove(move) {
     if (!gameInfo) return
-    fetch(`http://192.168.1.102:8080/api/games/move`,{
+    fetch(`http://192.168.0.6:7979/api/games/move`,{
       method: "post",
       headers: {
         "Content-Type": "application/json",
