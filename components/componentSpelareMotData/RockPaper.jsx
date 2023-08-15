@@ -4,7 +4,6 @@ import Constants from 'expo-constants';
 import DisplayResult from './DisplayResult';
 import Actions from './Actions';
 import Header from './Header';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function RockPaper(){
     const [userChoice, setuserChoice] = useState(0);

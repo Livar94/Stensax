@@ -2,7 +2,6 @@ import React from 'react';
 
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-import RockPaper from './../componentSpelareMotData/RockPaper';
 
 
 const Button = ({title, onPress}) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
 
-// import { generateToken, setNameAndUuid } from './api'; // Importera dina API-metoder här
+
 
 export default function Player({ navigation }) {
   const [token, setToken] = useState('');
@@ -13,7 +13,7 @@ export default function Player({ navigation }) {
   }, []);
 
   function getToken(func, p1) {
-    fetch('http://localhost:7979/api/user/auth/token', {
+    fetch('http://192.168.1.108:8080/api/user/auth/token', {
       method: 'post',
     })
       .then((response) => response.json())
@@ -23,13 +23,13 @@ export default function Player({ navigation }) {
         func(p1, data);
       })
       .catch((error) => {
-        console.error("There was an error with the fetch operation:", error);
+        console.error("There was an error:", error);
       });
   }
 
   function postName(name, token) {
     console.log(token, name, 'nameToken');
-    fetch('http://localhost:7979/api/user/name', {
+    fetch('http://192.168.1.108:8080/api/user/name', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function Player({ navigation }) {
   }
 
   function createGame() {
-    fetch('http://192.168.0.6:7979/api/games/game', {
+    fetch('http://192.168.1.108:8080/api/games/game', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export default function Player({ navigation }) {
   }
 
   function fetchGames() {
-    fetch('http://192.168.0.6:7979/api/games/games', {
+    fetch('http://192.168.1.108:8080/api/games/games', {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function Player({ navigation }) {
 
   function joinGame(gameId) {
     console.log(gameId, token, 'getting game and player id');
-    fetch(`http://192.168.0.6:7979/api/games/join`, {
+    fetch(`http://192.168.1.108:8080/api/games/join`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -144,14 +144,12 @@ export default function Player({ navigation }) {
           <Text>All open games:</Text>
           <FlatList
             data={games}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => String(item?.gameId)}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => joinGame(item.id)}>
-                <Text style={{ fontSize: 16, marginVertical: 5 }}>{item.id}</Text>
+              <TouchableOpacity onPress={() => joinGame(item?.gameId)}>
+                <Text style={{ fontSize: 16, marginVertical: 5 }}>{item?.gameId}</Text>
               </TouchableOpacity>
             )}
-            // style={{width: '100%', height: '100%'}}
-          
           />
         </View>
       ) : null}
