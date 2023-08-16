@@ -143,13 +143,16 @@ export default function Player({ navigation }) {
           <Button title="Create Game" onPress={createGame} />
           <Text>All open games:</Text>
           <FlatList
-            data={games}
-            keyExtractor={(item) => String(item?.gameId)}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => joinGame(item?.gameId)}>
-                <Text style={{ fontSize: 16, marginVertical: 5 }}>{item?.gameId}</Text>
-              </TouchableOpacity>
-            )}
+              data={games}
+              keyExtractor={(item) => String(item?.gameId)}
+              renderItem={({ item, index }) => (
+            <View style={{ marginVertical: 5 }}>
+            <Button 
+                    title={`Game #${index + 1}`} 
+                    onPress={() => joinGame(item?.gameId)} 
+                  />
+            </View>
+              )}
           />
         </View>
       ) : null}
