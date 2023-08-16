@@ -175,9 +175,6 @@ function Game({route, navigation }) {
         </TouchableOpacity>
       ))}
     </View>
-    <View style={styles.result}>
-      <Text style={styles.resultText}>{result_p}</Text>
-    </View>
     <View style={styles.buttonDiv}>
       {gameOver && (
         <TouchableOpacity style={styles.button} onPress={() => reset()}>
@@ -227,9 +224,6 @@ const styles = StyleSheet.create({
     buttonText: {
       color: '#fff',
       fontSize: 16,
-    },
-    result: {
-      marginBottom: 20,
     },
     resultText: {
       fontSize: 20,
